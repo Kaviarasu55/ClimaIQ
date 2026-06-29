@@ -420,3 +420,10 @@ SUMMARY: [2-3 sentence friendly daily weather summary like a morning briefing]
     document.getElementById("summaryText").textContent = "Unavailable right now.";
   }
 }
+
+// Auto-center active nav item
+document.querySelectorAll('.nav-item').forEach(item => {
+  item.addEventListener('click', function() {
+    this.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  });
+});

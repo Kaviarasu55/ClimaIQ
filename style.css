@@ -613,58 +613,83 @@ nav {
   .sidebar {
     width: 100%;
     height: auto;
-    position: relative;
-    padding: 16px;
-    flex-direction: row;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    padding: 10px 12px 8px;
+    gap: 6px;
+    border-right: none;
+    border-bottom: 1px solid #30363d;
+    z-index: 999;
+  }
+
+  .logo {
+    font-size: 1rem;
   }
 
   nav {
     flex-direction: row;
-    flex-wrap: wrap;
+    width: 100%;
+    overflow-x: auto;
+    gap: 4px;
+    flex-wrap: nowrap;
+    scrollbar-width: none;
+  }
+
+  nav::-webkit-scrollbar {
+    display: none;
   }
 
   .nav-item {
-    padding: 8px 10px;
-    font-size: 0.78rem;
+    padding: 6px 10px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    border-radius: 8px;
+    flex-shrink: 0;
   }
 
   .main {
     margin-left: 0;
+    margin-top: 100px;
     padding: 16px;
   }
 
-  .topbar {
-    flex-direction: column;
-  }
-
-  .profession-box input {
-    width: 100%;
-  }
-
-  #dashboardContent {
-    flex-direction: column;
-  }
-
-  .planner-layout {
-    flex-direction: column;
-  }
-
-  .vibe-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .vibe-card.wide {
-    grid-column: span 1;
-  }
-
+  .topbar { flex-direction: column; }
+  .profession-box input { width: 100%; }
+  #dashboardContent { flex-direction: column; }
+  .planner-layout { flex-direction: column; }
+  .vibe-grid { grid-template-columns: 1fr; }
+  .vibe-card.wide { grid-column: span 1; }
   .chat-layout {
-    height: calc(100vh - 280px);
+    height: calc(100dvh - 280px);
+  }
+  .chat-messages {
+    padding: 16px;
+  }
+  .chat-input-box {
+    padding: 12px;
   }
 
-  .hero-temp {
-    font-size: 2.8rem;
+  .chat-input-box input {
+    min-width: 0;
+    font-size: 14px;
+    padding: 10px 12px;
   }
+
+  .chat-input-box button {
+    padding: 10px 16px;
+    white-space: nowrap;
+  }
+
+  .chat-msg {
+    max-width: 85%;
+  }
+
+  .chat-msg p {
+    font-size: 14px;
+    padding: 10px 14px;
+  }
+  .hero-temp { font-size: 2.8rem; }
 }
