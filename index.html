@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ClimaIQ</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="app">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="logo">🌤 ClimaIQ</div>
+      <nav>
+        <a href="#" class="nav-item active" data-page="dashboard">🏠 Dashboard</a>
+        <a href="#" class="nav-item" data-page="planner">🎯 Activity Planner</a>
+        <a href="#" class="nav-item" data-page="packing">🎒 Smart Packing</a>
+        <a href="#" class="nav-item" data-page="chat">💬 Weather Chat</a>
+        <a href="#" class="nav-item" data-page="vibe">🌡 Weather Vibe</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+
+      <!-- DASHBOARD PAGE -->
+      <div id="page-dashboard" class="page">
+
+        <div class="topbar">
+          <div class="search-box">
+            <input type="text" id="cityInput" placeholder="Search city..." />
+            <button id="searchBtn">Search</button>
+          </div>
+          <div class="profession-box">
+            <input type="text" id="professionInput" placeholder="Your profession (e.g. farmer, photographer...)" />
+          </div>
+        </div>
+
+        <div id="errorMsg" class="hidden">
+          <p id="errorText"></p>
+        </div>
+
+        <div id="dashboardContent" class="hidden">
+          <div class="dash-left">
+
+            <div class="hero-card">
+              <img id="weatherIcon" src="" alt="icon" />
+              <div class="hero-temp" id="temperature"></div>
+              <div class="hero-city" id="cityName"></div>
+              <div class="hero-condition" id="condition"></div>
+              <div class="detail-grid">
+                <div class="detail-item">💧<span>Humidity</span><strong id="humidity"></strong></div>
+                <div class="detail-item">💨<span>Wind</span><strong id="wind"></strong></div>
+                <div class="detail-item">🌡<span>Feels Like</span><strong id="feelsLike"></strong></div>
+                <div class="detail-item">☁️<span>Clouds</span><strong id="clouds"></strong></div>
+              </div>
+            </div>
+
+            <div id="aiSection">
+              <h3 class="section-title">✨ AI Insight for You</h3>
+              <div class="ai-card">
+                <p id="aiText">Analyzing weather for your profession...</p>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="dash-right">
+            <div id="forecastSection">
+              <h3 class="section-title">Hourly Forecast</h3>
+              <div id="forecastRow"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ACTIVITY PLANNER PAGE -->
+      <div id="page-planner" class="page hidden">
+
+        <div class="topbar">
+          <h2 class="page-title">🎯 Activity Planner</h2>
+          <div id="plannerCityTag" class="city-tag"></div>
+        </div>
+
+        <div class="planner-card">
+          <h3 class="section-title">Plan Your Activity</h3>
+          <div class="planner-inputs">
+            <input type="text" id="plannerActivity" placeholder="Activity (e.g. cricket match, outdoor wedding...)" />
+            <input type="text" id="plannerTime" placeholder="When? (e.g. tomorrow evening, this Saturday)" />
+            <button id="plannerBtn">Analyze</button>
+          </div>
+        </div>
+
+        <div id="plannerResult" class="hidden">
+          <div class="confidence-box">
+            <span class="confidence-label">Success Confidence</span>
+            <div class="confidence-bar">
+              <div class="confidence-fill" id="confidenceFill"></div>
+            </div>
+            <span class="confidence-score" id="confidenceScore"></span>
+          </div>
+          <div class="ai-card">
+            <p id="plannerText"></p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SMART PACKING PAGE -->
+      <div id="page-packing" class="page hidden">
+
+        <div class="topbar">
+          <h2 class="page-title">🎒 Smart Packing</h2>
+          <div id="packingCityTag" class="city-tag"></div>
+        </div>
+
+        <div class="planner-card">
+          <h3 class="section-title">Generate Your Packing List</h3>
+          <div class="planner-inputs">
+            <input type="text" id="packingDestination" placeholder="Destination city (leave empty to use dashboard city)..." />
+            <input type="text" id="packingDuration" placeholder="Trip duration (e.g. 3 days, 1 week)" />
+            <input type="text" id="packingPurpose" placeholder="Purpose (e.g. business trip, beach vacation, wedding)" />
+            <button id="packingBtn">Generate List</button>
+          </div>
+        </div>
+
+        <div id="packingResult" class="hidden">
+          <div class="ai-card">
+            <p id="packingText"></p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- WEATHER CHAT PAGE -->
+      <div id="page-chat" class="page hidden">
+
+        <div class="topbar">
+          <h2 class="page-title">💬 Weather Chat</h2>
+          <div id="chatCityTag" class="city-tag"></div>
+        </div>
+
+        <div class="chat-layout">
+          <div class="chat-messages" id="chatMessages">
+            <div class="chat-msg bot">
+              <p>👋 Hi! I'm your Weather Assistant. Ask me anything about the weather in your city!</p>
+            </div>
+          </div>
+          <div class="chat-input-box">
+            <input type="text" id="chatInput" placeholder="Ask anything... e.g. Will it rain tonight?" />
+            <button id="chatSendBtn">Send</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- WEATHER VIBE PAGE -->
+      <div id="page-vibe" class="page hidden">
+
+        <div class="topbar">
+          <h2 class="page-title">🌡 Weather Vibe</h2>
+          <div id="vibeCityTag" class="city-tag"></div>
+        </div>
+
+        <div class="vibe-grid">
+          <div class="vibe-card">
+            <h3>🎭 Mood Index</h3>
+            <div class="vibe-value" id="moodValue">—</div>
+            <p id="moodDesc"></p>
+          </div>
+
+          <div class="vibe-card">
+            <h3>👕 Clothing Adviser</h3>
+            <div class="ai-card">
+              <p id="clothingText">Search a city on Dashboard first.</p>
+            </div>
+          </div>
+
+          <div class="vibe-card wide">
+            <h3>📋 Daily Summary</h3>
+            <div class="ai-card">
+              <p id="summaryText">Search a city on Dashboard first.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
