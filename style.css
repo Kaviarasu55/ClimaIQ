@@ -608,3 +608,63 @@ nav {
 .hidden {
   display: none;
 }
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    padding: 16px;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .nav-item {
+    padding: 8px 10px;
+    font-size: 0.78rem;
+  }
+
+  .main {
+    margin-left: 0;
+    padding: 16px;
+  }
+
+  .topbar {
+    flex-direction: column;
+  }
+
+  .profession-box input {
+    width: 100%;
+  }
+
+  #dashboardContent {
+    flex-direction: column;
+  }
+
+  .planner-layout {
+    flex-direction: column;
+  }
+
+  .vibe-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .vibe-card.wide {
+    grid-column: span 1;
+  }
+
+  .chat-layout {
+    height: calc(100vh - 280px);
+  }
+
+  .hero-temp {
+    font-size: 2.8rem;
+  }
+}
