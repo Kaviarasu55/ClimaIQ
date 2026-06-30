@@ -106,7 +106,7 @@ def ai_insight():
     }
 
     body = {
-        "model": "llama-3.1-8b-instant",
+        "model": "openai/gpt-oss-120b",
         "messages": [
             {"role": "user", "content": prompt}
         ]
