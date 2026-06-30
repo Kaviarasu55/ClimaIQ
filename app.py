@@ -106,7 +106,7 @@ def ai_insight():
     }
 
     body = {
-        "model": "llama-3.3-70b-versatile",
+        "model": "llama-3.1-8b-instant",
         "messages": [
             {"role": "user", "content": prompt}
         ]
