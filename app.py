@@ -34,29 +34,36 @@ def get_weather():
         return jsonify({"error": "City name required"}), 400
 
     # Fix 6 — URL encoding using params
-    response = requests.get(f"{OWM_BASE}/weather", params={
-        "q": city,
-        "appid": API_KEY,
-        "units": "metric"
-    })
+    response = requests.get(
+        f"{OWM_BASE}/weather", params={"q": city, "appid": API_KEY, "units": "metric"}
+    )
     data = response.json()
 
     if response.status_code != 200:
         return jsonify({"error": data.get("message", "City not found")}), 404
 
-    return jsonify({
-        "city": data["name"],
-        "country": data["sys"]["country"],
-        "lat": data["coord"]["lat"],
-        "lon": data["coord"]["lon"],
-        "temp": data["main"]["temp"],
-        "feels_like": data["main"]["feels_like"],
-        "humidity": data["main"]["humidity"],
-        "condition": data["weather"][0]["description"],
-        "icon": data["weather"][0]["icon"],
-        "wind": data["wind"]["speed"],
-        "clouds": data["clouds"]["all"]
-    })
+    return jsonify(
+        {
+            "city": data["name"],
+            "country": data["sys"]["country"],
+            "lat": data["coord"]["lat"],
+            "lon": data["coord"]["lon"],
+            "temp": data["main"]["temp"],
+            "feels_like": data["main"]["feels_like"],
+            "humidity": data["main"]["humidity"],
+            "temp_min": data["main"]["temp_min"],
+            "temp_max": data["main"]["temp_max"],
+            "pressure": data["main"]["pressure"],
+            "condition": data["weather"][0]["description"],
+            "icon": data["weather"][0]["icon"],
+            "wind": data["wind"]["speed"],
+            "wind_deg": data["wind"].get("deg", 0),
+            "clouds": data["clouds"]["all"],
+            "visibility": data.get("visibility", 0),
+            "sunrise": data["sys"]["sunrise"],
+            "sunset": data["sys"]["sunset"],
+        }
+    )
 
 
 @app.route("/forecast")
@@ -66,12 +73,10 @@ def get_forecast():
         return jsonify({"error": "City name required"}), 400
 
     # Fix 6 — URL encoding using params
-    response = requests.get(f"{OWM_BASE}/forecast", params={
-        "q": city,
-        "appid": API_KEY,
-        "units": "metric",
-        "cnt": 6 
-    })
+    response = requests.get(
+        f"{OWM_BASE}/forecast",
+        params={"q": city, "appid": API_KEY, "units": "metric", "cnt": 6},
+    )
     data = response.json()
 
     if response.status_code != 200:
@@ -79,12 +84,14 @@ def get_forecast():
 
     hours = []
     for item in data["list"]:
-        hours.append({
-            "time": item["dt_txt"][11:16],
-            "temp": item["main"]["temp"],
-            "icon": item["weather"][0]["icon"],
-            "condition": item["weather"][0]["description"]
-        })
+        hours.append(
+            {
+                "time": item["dt_txt"][11:16],
+                "temp": item["main"]["temp"],
+                "icon": item["weather"][0]["icon"],
+                "condition": item["weather"][0]["description"],
+            }
+        )
 
     return jsonify(hours)
 
@@ -102,14 +109,12 @@ def ai_insight():
 
     headers = {
         "Authorization": f"Bearer {GROQ_API_KEY}",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
     }
 
     body = {
         "model": "openai/gpt-oss-120b",
-        "messages": [
-            {"role": "user", "content": prompt}
-        ]
+        "messages": [{"role": "user", "content": prompt}],
     }
 
     try:
@@ -117,7 +122,7 @@ def ai_insight():
             "https://api.groq.com/openai/v1/chat/completions",
             headers=headers,
             json=body,
-            timeout=15
+            timeout=15,
         )
         result = res.json()
         if "choices" not in result:
