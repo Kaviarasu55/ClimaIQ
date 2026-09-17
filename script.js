@@ -1,5 +1,5 @@
 // ─── Config ───────────────────────────────────────────────
-const BASE_URL = "https://climaiq.onrender.com";
+const BASE_URL = "https://climaiq-927z.onrender.com";
 
 // ─── Page Switching ───────────────────────────────────────
 const navItems = document.querySelectorAll(".nav-item");
